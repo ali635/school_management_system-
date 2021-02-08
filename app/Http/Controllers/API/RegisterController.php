@@ -28,18 +28,11 @@ class RegisterController extends BaseController
             $input = $request->all();
             $input['password'] = Hash::make($input['password']);
             $user = User::create($input);
-            $success['token'] = $user->createToken('mohame')->accessToken;
+            $success['token'] = $user->createToken('Muhammed')->accessToken;
             $success['name'] = $user->name;
 
         return $this->sendResponse($success ,'User registered successfully' );
     }
-
-
-
-
-
-
-
 
     public function login(Request $request)
     {
@@ -47,7 +40,7 @@ class RegisterController extends BaseController
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password]))
         {
             $user = Auth::user();
-            $success['token'] = $user->createToken('mohamed')->accessToken;
+            $success['token'] = $user->createToken('Muhammed')->accessToken;
             $success['name'] = $user->name;
             return $this->sendResponse($success ,'User login successfully' );
         }

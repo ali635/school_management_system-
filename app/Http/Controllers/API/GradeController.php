@@ -71,8 +71,13 @@ class GradeController extends BaseController
     {
 
         $Grades = Grade::find($id);
-        $Grades->delete();
-        return $this->sendResponse(new GradeResource($Grades)  ,'Product deleted successfully' );
+        if ($Grades != null) {
+            $Grades->delete();
+            return $this->sendResponse(new GradeResource($Grades)  ,'Product deleted successfully' );
+        }
+        else {
+            return $this->sendError('Grade not found');
+        }
 
     }
 }

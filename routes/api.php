@@ -30,6 +30,15 @@ Route::group(['middleware' => ['auth:api','changeLanguage'], 'namespace' => 'API
     Route::post('Grades-store', 'GradeController@store');
 });
 
+Route::group(['prefix' => 'Classrooms','middleware' => ['auth:api','changeLanguage'], 'namespace' => 'API'], function (){
+    Route::post('index', 'ClassroomController@index');
+    Route::post('show/{id}', 'ClassroomController@show');
+    Route::post('update/{id}','ClassroomController@update');
+    Route::delete('delete/{id}', 'ClassroomController@destroy');
+    Route::post('store', 'ClassroomController@store');
+});
+
+
 // Route::middleware('auth:api')->group( function (){
 //     Route::resource('Grades', 'API\GradeController');
 // });

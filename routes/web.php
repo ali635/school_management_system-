@@ -15,13 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::group(['middleware' => ['guest']], function () {
 
-    Route::get('/', function () {
-        return view('auth.login');
-    });
-
-});
 
 
  //==============================Translate all pages============================
@@ -30,6 +24,14 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
     ], function () {
+    
+    Route::group(['middleware' => ['guest']], function () {
+
+        Route::get('/', function () {
+            return view('auth.login');
+        });
+    
+    });
 
      //==============================dashboard============================
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
@@ -38,9 +40,15 @@ Route::group(
     Route::group(['namespace' => 'Grades'], function () {
         Route::resource('Grades', 'GradeController');
     });
-    Route::group(['namespace' => 'Classrooms'], function () {
-        Route::resource('Classrooms', 'ClassroomController');
-    });
+   
+    //==============================Classrooms============================
+   Route::group(['namespace' => 'Classrooms'], function () {
+    Route::resource('Classrooms', 'ClassroomController');
+    Route::post('delete_all', 'ClassroomController@delete_all')->name('delete_all');
+
+    Route::post('Filter_Classes', 'ClassroomController@Filter_Classes')->name('Filter_Classes');
+
+});
 
 
 });
