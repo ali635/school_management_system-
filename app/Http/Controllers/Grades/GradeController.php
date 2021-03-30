@@ -8,6 +8,7 @@ use App\Http\Requests\StoreGrades;
 use App\Models\Classroom;
 use App\Models\Grade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GradeController extends Controller
 {
@@ -20,6 +21,7 @@ class GradeController extends Controller
   public function index()
   {
       $Grades = Grade::all();
+      //$Grades = DB::table('grades')->get();
       // dd($Grades);
       return view('pages.Grades.Grades',compact('Grades'));
   }

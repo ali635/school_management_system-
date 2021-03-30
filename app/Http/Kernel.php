@@ -71,3 +71,4 @@ class Kernel extends HttpKernel
         'changeLanguage' => \App\Http\Middleware\ChangeLanguage::class
     ];
 }
+

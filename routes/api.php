@@ -38,6 +38,22 @@ Route::group(['prefix' => 'Classrooms','middleware' => ['auth:api','changeLangua
     Route::post('store', 'ClassroomController@store');
 });
 
+Route::group(['prefix' => 'Sections','middleware' => ['auth:api','changeLanguage'], 'namespace' => 'API'], function (){
+    Route::post('index', 'SectionController@index');
+    Route::post('show/{id}', 'SectionController@show');
+    Route::post('update/{id}','SectionController@update');
+    Route::delete('delete/{id}', 'SectionController@destroy');
+    Route::post('store', 'SectionController@store');
+});
+
+Route::group(['prefix' => 'Teachers','middleware' => ['auth:api','changeLanguage'], 'namespace' => 'API'], function (){
+    Route::post('index', 'TeacherController@index');
+    Route::post('show/{id}', 'TeacherController@show');
+    Route::post('update/{id}','TeacherController@update');
+    Route::delete('delete/{id}', 'TeacherController@destroy');
+    Route::post('store', 'TeacherController@store');
+});
+
 
 // Route::middleware('auth:api')->group( function (){
 //     Route::resource('Grades', 'API\GradeController');

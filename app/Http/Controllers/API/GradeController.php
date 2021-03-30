@@ -43,7 +43,7 @@ class GradeController extends BaseController
 
   public function show($id)
     {
-        $Grade = Grade::find($id);
+        $Grade = Grade::findOrFail($id);
         if ( is_null($Grade) ) {
             return $this->sendError('Grade not found'  );
               }
@@ -60,7 +60,7 @@ class GradeController extends BaseController
         {
             return $this->sendError('Please validate error' ,$validator->errors() );
         }
-        $Grade = Grade::find($id);
+        $Grade = Grade::findOrFail($id);
         $Grade->update([
             $Grade->Name = ['ar' => $request->Name, 'en' => $request->Name_en],
             $Grade->Notes = $request->Notes,
@@ -70,7 +70,7 @@ class GradeController extends BaseController
     public function destroy($id)
     {
 
-        $Grades = Grade::find($id);
+        $Grades = Grade::findOrFail($id);
         if ($Grades != null) {
             $Grades->delete();
             return $this->sendResponse(new GradeResource($Grades)  ,'Product deleted successfully' );

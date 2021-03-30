@@ -21,7 +21,7 @@ class ClassroomController extends BaseController
   {
     $My_Classes = Classroom::all();
       return $this->sendResponse(ClassResource::collection($My_Classes),
-          'All Grades sent');
+          'All Classrooms sent');
   }
   
   public function store(Request  $request)
@@ -45,9 +45,9 @@ class ClassroomController extends BaseController
 
   public function show($id)
     {
-        $Class = Classroom::find($id);
+        $Class = Classroom::findOrFail($id);
         if ( is_null($Class) ) {
-            return $this->sendError('Grade not found'  );
+            return $this->sendError('Classroom not found'  );
               }
               return $this->sendResponse(new ClassResource($Class) ,'class found successfully' );
 
@@ -64,7 +64,7 @@ class ClassroomController extends BaseController
         {
             return $this->sendError('Please validate error' ,$validator->errors() );
         }
-        $Class = Classroom::find($id);
+        $Class = Classroom::findOrFail($id);
         $Class->update([
             $Class->Name_Class = ['ar' => $request->Name_Class, 'en' => $request->Name_class_en],
             $Class->Grade_id = $request->Grade_id,
@@ -74,7 +74,7 @@ class ClassroomController extends BaseController
 
     public function destroy($id)
     {
-        $Class = Classroom::find($id);
+        $Class = Classroom::findOrFail($id);
         if ($Class != null) {
             $Class->delete();
             return $this->sendResponse(new ClassResource($Class)  ,'class deleted successfully' );

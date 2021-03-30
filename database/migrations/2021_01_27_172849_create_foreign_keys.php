@@ -9,6 +9,7 @@ class CreateForeignKeys extends Migration {
 	public function up()
 	{
 		Schema::table('Classrooms', function(Blueprint $table) {
+			
 			$table->foreign('Grade_id')->references('id')->on('Grades')
 						->onDelete('cascade')
 						->onUpdate('cascade');
